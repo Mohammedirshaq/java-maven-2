@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mava -cp target/my-app-1.0-SNAPSHOT.jar com.example.App'
+                sh 'java -cp target/my-app-1.0-SNAPSHOT.jar com.example.App'
             }
         }
 	}

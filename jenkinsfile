@@ -9,7 +9,18 @@ pipeline {
 	stage("st-2") {
 	    steps {
 		sh 'cat /var/lib/jenkins/workspace/java-maven/jenkinsfile'
+
 		}
     	}
+	stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
 	}
 }

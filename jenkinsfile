@@ -6,5 +6,10 @@ pipeline {
                 echo "hello 2"
             }
         }
-    }
+	stage("st-2") {
+	    steps {
+		cat jenkinsfile
+		}
+    	}
+	}
 }

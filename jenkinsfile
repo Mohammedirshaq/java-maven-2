@@ -8,7 +8,7 @@ pipeline {
         }
 	stage("st-2") {
 	    steps {
-		cat /var/lib/jenkins/workspace/java-maven/jenkinsfile
+		sh 'cat /var/lib/jenkins/workspace/java-maven/jenkinsfile'
 		}
     	}
 	}

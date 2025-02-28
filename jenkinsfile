@@ -1,14 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage("st-2") {
+        stage("st-1") {
             steps {
                 echo "hello 2"
             }
         }
 	stage("st-2") {
 	    steps {
-		cat jenkinsfile
+		cat /var/lib/jenkins/workspace/java-maven/jenkinsfile
 		}
     	}
 	}

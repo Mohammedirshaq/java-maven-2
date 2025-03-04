@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'JDK11'  // Ensure JDK is installed in Jenkins
+        maven 'Maven'  // Ensure Maven is installed in Jenkins
+    }
+
+    environment {
+        SONARQUBE_URL = 'http://35.211.186.41:9000'
+        SONARQUBE_CREDENTIALS_ID = 'sonar' // Set this in Jenkins Credentials
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/Mohammedirshaq/java-maven-2.git'
+            }
+        }
+
+        stage('Build and Analyze') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh 'mvn clean verify sonar:sonar'
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                script {
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "Pipeline failed due to SonarQube Quality Gate failure"
+                    }
+                }
+            }
+        }
+    }
+}
